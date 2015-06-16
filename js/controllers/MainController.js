@@ -1,8 +1,14 @@
 testApp.controller('MainController', function(){
   this.text = '';
-  this.newDate = dateToYMD(new Date());
+  this.subs = getConfig();
 
   this.substitute = function substitute(outCurr) {
-    this.result = replaceAll(this.text, '150616', this.newDate);
+    var newText = this.text;
+
+    for (t=0; t<this.subs.length; t++) {
+      newText = replaceAll(newText, this.subs[t].originalText, this.subs[t].newText);
+    }
+
+    this.result = newText;
   };
 })
